@@ -1,6 +1,7 @@
 ---
 import Header from "../components/Header.astro";
 import Base from '../layouts/Base.astro';
+import Footer from '../components/Footer.astro';
 ---
 
 <html lang="en">
@@ -13,8 +14,9 @@ import Base from '../layouts/Base.astro';
 	<body>
         <Header />
         <Base titre="Accueil">
-    <h1 class="text-2xl">Offres</h1> 
-		<h1>Hello world </h1>
+    <h1 class="bg-red-950 text-white text-4xl p-10 font-semibold text-center">Offres</h1> 
+		<h1 class="text-2xl font-medium font-serif p-8 ">Hello world </h1>
 		</Base>
+        <Footer />
 	</body>
 </html>
