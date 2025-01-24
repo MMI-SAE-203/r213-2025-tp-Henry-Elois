@@ -41,38 +41,26 @@ const offres = [
 
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Offres</title>
-		<link href="https://fonts.googleapis.com/css2?family=Playwrite+IN:wght@100..400&display=swap" rel="stylesheet">
-		<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.12.0/dist/cdn.min.js" defer></script>
-	</head>
 	<body>
         <Header />
         <Base titre="Accueil">
     <h1 class="bg-red-950 text-white text-4xl p-10 font-semibold text-center">Offres</h1> 
 		<h1 class="text-2xl font-medium p-8 font-Playwrite-IN">Ci dessous les offres que nous proposons </h1>
 		</Base>
-<ul>
-  {offres.map((offre) => <Card {...offre} />)}
-</ul>
 
 <div x-data="{ showFavorites: false }">
-  <button @click="showFavorites = !showFavorites">
+  <button @click="showFavorites = !showFavorites" class="bg-red-800 hover:opacity-50 hover:border-3 hover:border-red-800  text-white font-bold py-2 px-4 rounded ml-5">
     <span x-show="!showFavorites">Afficher les favoris</span>
     <span x-show="showFavorites">Afficher tout</span>
   </button>
 
-  <div x-show="!showFavorites">
+  <div x-show="!showFavorites"class="flex">
     {offres.map((offre) => (
       <Card {...offre} />
     ))}
   </div>
 
-  <div x-show="showFavorites">
+  <div x-show="showFavorites" class="flex">
     {offres.map((offre) => offre.favori && <Card {...offre} />)}
   </div>
 </div>
