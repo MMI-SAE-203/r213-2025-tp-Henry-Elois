@@ -6,6 +6,7 @@ import Card from '../components/Card.astro';
 import { getOffres } from "../backend.mjs";
 
 const offres = await getOffres();
+console.log(offres);
 
 ---
 
@@ -23,13 +24,13 @@ const offres = await getOffres();
   </button>
 
   <div x-show="!showFavorites"class=>
-    {offres.map((offre) => (
-      <Card {...offre} />
+    {offres.map((offres) => (
+      <Card {...offres} />
     ))}
   </div>
 
   <div x-show="showFavorites" class=>
-    {offres.map((offre) => offre.favori && <Card {...offre} />)}
+    {offres.map((offres) => offres.favoris && <Card {...offres} />)}
   </div>
 
 </div>

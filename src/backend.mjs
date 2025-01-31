@@ -7,11 +7,17 @@ export async function getOffres() {
       sort: "-created",
     });
 
-    data = data.map((a) => ({...a,img: a.image ? pb.files.getURL(a.image) : null,
-    }));
+    data = data.map((a) => {
+      
+      a.img = pb.files.getURL(a, a.image);
+      return a;
+    });
+
     return data;
-} catch (error) {
-    console.error("Une erreur est survenue en lisant la liste des maisons",error
+  } catch (error) {
+    console.error(
+      "Une erreur est survenue en lisant la liste des maisons",
+      error
     );
     return [];
   }
