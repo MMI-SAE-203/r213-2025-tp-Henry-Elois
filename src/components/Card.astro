@@ -4,6 +4,7 @@ const offre = Astro.props;
 
 <div class="bg-gray-200 p-4 m-4 rounded-lg shadow-lg ">
     <p class="text-2xl pb-2 "> {offre.nomMaison}</p>
+    <img src={offre.img}/>
     <p>Adresse : {offre.adresse}</p>
     <p>Favori :{offre.favori}</p>
     <p>Id :{offre.id}</p>
@@ -11,5 +12,4 @@ const offre = Astro.props;
     <p>Nombre de salle de bain : {offre.nbSdb}</p>
     <p> Prix :{offre.prix}</p>
     <p>Surface : {offre.surface}</p>
-    <img src={offre.img}/>
 </div>
