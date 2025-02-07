@@ -1,0 +1,23 @@
+---
+import { getOffre } from "../../backend.mjs";
+import Base from "../../layouts/Base.astro";
+
+const { id } = Astro.params;
+const offre = await getOffre(id);
+if (!offre) {
+  return Astro.redirect("/offres");
+}
+---
+
+<Base titre={offre.nomMaison}>
+  <h2>{offre.nomMaison}</h2>
+  <ul>
+    <li>{offre.adresse}</li>
+    <li>Favori :{offre.favori}<li/>
+    <li>Id :{offre.id}<li/>
+    <li>Nombre de chambres : {offre.nbChambres}<li/>
+    <li>Nombre de salle de bain : {offre.nbSdb}</li>
+    <li>Prix :{offre.prix}<li/>
+    <li>Surface : {offre.surface}<li/>
+  </ul>
+</Base>
