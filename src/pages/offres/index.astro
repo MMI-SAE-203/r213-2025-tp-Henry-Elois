@@ -41,6 +41,9 @@ console.log(offres);
       <span x-show="showFavorites"> Retour</span>
     </button>
 
+    <a href="/offres/surface/80" class="bg-yellow-500 hover:opacity-50 text-white font-bold py-2 px-4 rounded ml-5">
+      Maisons de plus de 80 m²</a>
+
     <div
       x-show="!showFavorites"
       :class="view === 'grid' ? 'grid grid-cols-3 gap-4' : 'flex flex-col'"
@@ -50,5 +53,5 @@ console.log(offres);
     <div x-show="showFavorites" class="">
       {offres.map((offres) => offres.favoris && <Card {...offres} />)}
     </div>
-  </div>
+
 </Base>

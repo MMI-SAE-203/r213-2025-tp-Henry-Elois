@@ -1,13 +1,17 @@
 ---
+import Header from "../../../components/Header.astro";
+import Base from "../../../layouts/Base.astro";
+import Footer from "../../../components/Footer.astro";
 import Card from "../../../components/Card.astro";
 import { getMaisonsParSurface } from "../../../backend.mjs";
+
 const { surface } = Astro.params;
 const minSurface = parseFloat(surface) || 0;
 const maisons = await getMaisonsParSurface(minSurface);
 console.log(maisons);
 ---
-
-<h1>Maisons avec une surface supérieure à {surface} m²</h1>
+<Header></Header>
+<h1>Maisons avec une surface de plus de {surface} m²</h1>
 
 {
   maisons.length > 0 ? (
