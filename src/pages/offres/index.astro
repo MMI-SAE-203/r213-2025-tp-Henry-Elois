@@ -43,7 +43,7 @@ console.log(offres);
 
     <div
       x-show="!showFavorites"
-      :class="view === 'grid' ? : flex flex-col"
+      :class="view === 'grid' ? 'grid grid-cols-3 gap-4' : 'flex flex-col'"
     >
       {offres.map((offres) => <Card {...offres} />)}
     </div>
