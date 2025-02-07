@@ -1,27 +1,13 @@
 ---
 import Header from "../components/Header.astro";
-import Base from '../layouts/Base.astro';
-import Footer from '../components/Footer.astro';
+import Base from "../layouts/Base.astro";
+import Footer from "../components/Footer.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Document</title>
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playwrite+IN:wght@100..400&display=swap" rel="stylesheet">
-	</head>
-	<body>
-		<Header />
-		<Base titre="Accueil">
-    <h1 class="bg-red-950 text-white text-4xl p-10 font-semibold text-center">Accueil</h1> 
-		<h1 class="text-2xl font-medium p-8 font-Playwrite-IN">Hello, Astro!</h1>
-		</Base>
-		<img class="w-auto" src="src/assets/image/pont.jpg" alt="pont">
-		<Footer />
-	</body>
-</html>
-
+<Base titre="Accueil">
+  <h1 class="bg-red-950 text-white text-4xl p-10 font-semibold text-center">
+    Accueil
+  </h1>
+  <h1 class="text-2xl font-medium p-8 font-Playwrite-IN">Hello, Astro!</h1>
+  <img class="w-auto" src="src/assets/image/pont.jpg" alt="pont" />
+</Base>

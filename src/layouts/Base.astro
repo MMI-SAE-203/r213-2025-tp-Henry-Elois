@@ -1,4 +1,5 @@
 ---
+import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 
 const { titre } = Astro.props;
@@ -14,8 +15,10 @@ const { titre } = Astro.props;
 		<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.12.0/dist/cdn.min.js" defer></script>
     </head>
     <body>
+         <Header/>
         <main>
             <slot />
         </main>
+        <Footer/>
     </body>
 </html>
