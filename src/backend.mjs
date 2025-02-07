@@ -8,7 +8,6 @@ export async function getOffres() {
     });
 
     data = data.map((a) => {
-      
       a.img = pb.files.getURL(a, a.image);
       return a;
     });
@@ -31,5 +30,21 @@ export async function getOffre(id) {
   } catch (error) {
     console.log("Une erreur est survenue en lisant la maison", error);
     return null;
+  }
+}
+
+export async function getMaisonsParSurface(minSurface) {
+  try {
+    let records = await pb.collection("maison").getFullList({
+      filter: `surface > ${minSurface}`,
+    });
+    records = records.map((a) => {
+      a.img = pb.files.getURL(a, a.image);
+      return a;
+    });
+    return records;
+  } catch (error) {
+    console.error("Erreur lors de la récupération des maisons :", error);
+    return [];
   }
 }

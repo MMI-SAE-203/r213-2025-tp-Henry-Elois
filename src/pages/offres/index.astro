@@ -16,7 +16,7 @@ console.log(offres);
   <h1 class="text-2xl font-medium p-8 font-Playwrite-IN">
     Ci dessous les offres que nous proposons
   </h1>
-  <div x-data="{ showFavorites: false }">
+  <div x-data="{ showFavorites: false, view: 'grid' }">
     <button
       @click="showFavorites = !showFavorites"
       class="bg-red-800 hover:opacity-50 hover:border-3 hover:border-red-800 text-white font-bold py-2 px-4 rounded ml-5"
@@ -26,7 +26,7 @@ console.log(offres);
     </button>
 
     <button
-      @click="view = 'grid' :'hidden'"
+      @click="view ='grid'"
       class="bg-blue-500 hover:opacity-50 text-white font-bold py-2 px-4 rounded ml-5"
     >
       <span x-show="!showFavorites">Afficher en grille</span>
@@ -34,14 +34,17 @@ console.log(offres);
     </button>
 
     <button
-      @click="view = 'list' : 'hidden' "
+      @click="view = 'list' "
       class="bg-green-500 hover:opacity-50 text-white font-bold py-2 px-4 rounded ml-5"
     >
       <span x-show="!showFavorites">Afficher en liste</span>
       <span x-show="showFavorites"> Retour</span>
     </button>
 
-    <div x-show="!showFavorites" class="">
+    <div
+      x-show="!showFavorites"
+      :class="view === 'grid' ? : flex flex-col"
+    >
       {offres.map((offres) => <Card {...offres} />)}
     </div>
     <div x-show="showFavorites" class="">

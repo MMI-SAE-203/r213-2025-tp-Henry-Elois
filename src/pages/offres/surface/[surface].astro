@@ -1,0 +1,22 @@
+---
+import Card from "../../../components/Card.astro";
+import { getMaisonsParSurface } from "../../../backend.mjs";
+const { surface } = Astro.params;
+const minSurface = parseFloat(surface) || 0;
+const maisons = await getMaisonsParSurface(minSurface);
+console.log(maisons);
+---
+
+<h1>Maisons avec une surface supérieure à {surface} m²</h1>
+
+{
+  maisons.length > 0 ? (
+    <div class="grid">
+      {maisons.map((maison) => (
+        <Card {...maison} />
+      ))}
+    </div>
+  ) : (
+    <p>Aucune maison trouvée.</p>
+  )
+}
