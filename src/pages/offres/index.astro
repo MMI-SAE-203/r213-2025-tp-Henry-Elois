@@ -1,11 +1,32 @@
 ---
-import Header from "../../components/Header.astro";
 import Base from "../../layouts/Base.astro";
-import Footer from "../../components/Footer.astro";
 import Card from "../../components/Card.astro";
 import { getOffres } from "../../backend.mjs";
+import {filterByPrix }from "../../backend.mjs";
 
-const offres = await getOffres();
+
+let message = "";
+let offres = [];
+if (Astro.request.method === "POST") {
+  const data = await Astro.request.formData();
+  const minPrix = parseInt(data.get("minPrix") as string );
+  const maxPrix = parseInt(data.get("maxPrix")as string);
+
+  if (minPrix > 0 && maxPrix > 0 && maxPrix > minPrix) {
+    offres = await filterByPrix(minPrix, maxPrix);
+    if (offres.length === 0) {
+      message = `Pas d'offres entre ${minPrix}€ et ${maxPrix}€`;
+    } else {
+      message = `Liste des offres entre ${minPrix}€ et ${maxPrix}€`;
+    }
+  } else {
+    message = "Veuillez entrer des valeurs valides pour le prix.";
+    offres = await getOffres();
+  }
+} else {
+  offres = await getOffres();
+}
+
 console.log(offres);
 ---
 
@@ -16,6 +37,11 @@ console.log(offres);
   <h1 class="text-2xl font-medium p-8 font-Playwrite-IN">
     Ci dessous les offres que nous proposons
   </h1>
+  <form action="/offres" method="POST" class="flex justify-center">
+    <input type="number" name="minPrix" placeholder="Prix minimum" />
+    <input type="number" name="maxPrix" placeholder="Prix maximum" />
+    <input type="submit" value="Filtrer par prix" />
+  </form>
   <div x-data="{ showFavorites: false, view: 'grid' }">
     <button
       @click="showFavorites = !showFavorites"
@@ -41,8 +67,12 @@ console.log(offres);
       <span x-show="showFavorites"> Retour</span>
     </button>
 
-    <a href="/offres/surface/80" class="bg-yellow-500 hover:opacity-50 text-white font-bold py-2 px-4 rounded ml-5">
-      Maisons de plus de 80 m²</a>
+    <a
+      href="/offres/surface/80"
+      class="bg-yellow-500 hover:opacity-50 text-white font-bold py-2 px-4 rounded ml-5"
+    >
+      Maisons de plus de 80 m²</a
+    >
 
     <div
       x-show="!showFavorites"
@@ -53,5 +83,5 @@ console.log(offres);
     <div x-show="showFavorites" class="">
       {offres.map((offres) => offres.favoris && <Card {...offres} />)}
     </div>
-
+  </div>
 </Base>
