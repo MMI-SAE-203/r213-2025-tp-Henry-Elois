@@ -1,0 +1,26 @@
+---
+import Base from "../../layouts/Base.astro";
+import Card from "../../components/Card.astro";
+import { allMaisonsByAgentsId } from "../../backend.mjs";
+
+const { id } = Astro.params;
+const offres = await allMaisonsByAgentsId(id);
+
+let message =
+  offres.length === 0 ? "Aucune offre disponible pour cet agent" : "";
+---
+
+<Base titre="offrebyagent">
+  <h1>Offres de l'agent </h1>
+  <p>{message}</p>
+
+  <div>
+    {
+      offres.map((offre) => (
+        <div key={offre.id}>
+          <Card {...offre} />
+        </div>
+      ))
+    }
+  </div>
+</Base>

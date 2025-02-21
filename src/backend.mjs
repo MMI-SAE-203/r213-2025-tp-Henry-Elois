@@ -84,3 +84,32 @@ export async function filterByPrix(prixMin, prixMax) {
     return [];
   }
 }
+
+export async function allAgents() {
+  try {
+    let data = await pb.collection("agent").getFullList({
+      sort: "-created",
+    });
+
+    data = data.map((a) => {
+      a.img = pb.files.getURL(a, a.image);
+      return a;
+    });
+
+    return data;
+  } catch (error) {
+    console.error(
+      "Une erreur est survenue en lisant la liste des maisons",
+      error
+    );
+    return [];
+  }
+}
+
+export async function allMaisonsByAgentsId(id) {
+  const allRecord = await pb.collection("maison").getFullList({
+    filter: `agent.id = '${id}'`,
+    expand: "agent",
+  });
+  return allRecord;
+}

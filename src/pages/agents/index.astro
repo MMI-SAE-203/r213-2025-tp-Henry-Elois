@@ -1,0 +1,30 @@
+---
+import Base from "../../layouts/Base.astro";
+import { allAgents } from "../../backend.mjs";
+
+const agents = await allAgents();
+console.log(agents);
+---
+
+<Base titre="Nos agents">
+  <h1 class="text-2xl font-semibold text-center my-4">
+    Vous découvrirez ci-dessous la liste de tous nos agents
+  </h1>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    {
+      agents.map((agent) => (
+        <div class="border-2 border-gray-200 p-4 rounded-lg shadow-lg">
+          <h2 class="text-xl font-bold">{agent.Nom}</h2>
+          <h2 class="text-lg">{agent.prenom}</h2>
+          <p class="text-gray-600">{agent.email}</p>
+          <a
+            href={`/agents/${agent.id}`}
+            class="bg-yellow-300 text-blackpy-2 px-4 rounded mt-4 inline-block text-center float-right"
+          >
+            Voir les offres de cet agent
+          </a>
+        </div>
+      ))
+    }
+  </div>
+</Base>
