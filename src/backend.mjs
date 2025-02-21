@@ -113,3 +113,7 @@ export async function allMaisonsByAgentsId(id) {
   });
   return allRecord;
 }
+
+export async function setFavori(house) {
+  await pb.collection("maison").update(house.id, { favori: !house.favori });
+}

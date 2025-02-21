@@ -1,5 +1,7 @@
 ---
+import favorite from "../assets/image/favorite.png";
 const { ...offre } = Astro.props;
+const { nom, prix, description, favoris, id } = Astro.props;
 ---
 
 <div class="bg-gray-200 p-4 m-4 rounded-lg shadow-lg">
@@ -8,4 +10,23 @@ const { ...offre } = Astro.props;
   <a href={`/offres/${offre.id}`}>Voir plus</a>
 </div>
 
+<div
+  class="card border p-4 rounded-md shadow-md"
+  x-data={`{favori: ${offre.favori}, clickFavori() {this.favori = !this.favori; setFavori(${JSON.stringify(offre)});}}`}
+>
+  <h2 class="text-xl font-semibold">{nom}</h2>
+  <p>{description}</p>
 
+  <button
+    x-data="{ favoris: {favoris} }"
+    x-on:click="favoris = !favoris; $dispatch('favori-modifie', { id: {id}, favoris })"
+    class="bg-transparent border-none cursor-pointer p-2"
+  >
+    <img
+      src="/favorite.png"
+      alt="Favori"
+      class="w-6 h-6"
+      x-bind:class="favoris ? 'opacity-100' : 'opacity-50'"
+    />
+</button>
+</div>
