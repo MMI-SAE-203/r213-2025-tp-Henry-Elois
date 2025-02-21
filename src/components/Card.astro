@@ -2,8 +2,14 @@
 import favorite from "../assets/image/favorite.png";
 const { ...offre } = Astro.props;
 const { nom, prix, description, favoris, id } = Astro.props;
+import { setFavori } from "../backend.js";
 ---
 
+<script>
+  //@ts-nocheck
+  import { setFavori } from "../../backend.js";
+  window.setFavori = setFavori;
+</script>
 <div class="bg-gray-200 p-4 m-4 rounded-lg shadow-lg">
   <p class="text-2xl pb-2">{offre.nomMaison}</p>
   <img src={offre.img} />
@@ -28,5 +34,5 @@ const { nom, prix, description, favoris, id } = Astro.props;
       class="w-6 h-6"
       x-bind:class="favoris ? 'opacity-100' : 'opacity-50'"
     />
-</button>
+  </button>
 </div>
